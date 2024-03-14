@@ -12,7 +12,7 @@ All you gotta do is activate the extension while on a video page, press the "Gen
 
 Built using `create-vite-app` (React, TypeScript, SWC)
 
-### Resources
+#### Resources
 
 [Google Gemini API Quickstart](https://ai.google.dev/tutorials/node_quickstart)
 
@@ -20,6 +20,6 @@ Built using `create-vite-app` (React, TypeScript, SWC)
 
 [Google Manifest File Format](https://developer.chrome.com/docs/extensions/reference/manifest)
 
-### 🚨 NOT PRODUCTION READY CODE.
+#### 🚨 NOT PRODUCTION READY CODE.
 
 I made this for fun just to play around with an LLM and to learn how to make Chrome extensions. To use this in a production setting, the code must be refactored in order to protect the API keys from leaking to the client. Refer to the `.env.example` file for more details.
