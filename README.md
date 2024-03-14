@@ -10,7 +10,7 @@ This is an extension for Chromium-based browsers that uses Google's Gemini Pro L
 
 All you gotta do is activate the extension while on a video page, press the "Generate a vibe check!" button, and let Gemini assess the vibes for you.
 
-Built using `create-vite-app` (React, TypeScript, SWC)
+Built using `create-vite-app` (React, TypeScript, SWC).
 
 #### Resources
 
@@ -18,6 +18,6 @@ Built using `create-vite-app` (React, TypeScript, SWC)
 - [YouTube Data API `commentThreads: list` Docs](https://developers.google.com/youtube/v3/docs/commentThreads/list)
 - [Google Manifest File Format](https://developer.chrome.com/docs/extensions/reference/manifest)
 
-#### 🚨 NOT PRODUCTION READY CODE.
+#### 🚨 NOT PRODUCTION READY CODE
 
 I made this for fun just to play around with an LLM and to learn how to make Chrome extensions. To use this in a production setting, the code must be refactored in order to protect the API keys from leaking to the client. Refer to the `.env.example` file for more details.
