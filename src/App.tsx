@@ -1,92 +1,61 @@
-import { useEffect, useState } from "react";
 import "./App.css";
-import { useQuery } from "@tanstack/react-query";
 
-type CommentThreads = {
-  items: {
-    snippet: {
-      topLevelComment: {
-        id: string;
-        snippet: {
-          textOriginal: string;
-        };
-      };
-    };
-  }[];
-};
+import { useEffect, useState } from "react";
+import getComments from "./lib/getComments";
+import getVideoId from "./lib/getVideoId";
+import getVibeCheck from "./lib/getVibeCheck";
+import reactLogo from "./assets/react.svg";
 
 function App() {
   const [videoId, setVideoId] = useState("");
 
   useEffect(() => {
-    const getVideoId = async () => {
-      const [tab] = await chrome.tabs.query({ active: true });
-
-      if (tab.url && tab.url.includes("youtube.com/watch")) {
-        const url = new URL(tab.url);
-        const params = new URLSearchParams(url.search);
-        const id = params.get("v")!;
-        setVideoId(id);
-      }
-    };
-
-    getVideoId();
+    getVideoId(setVideoId);
   }, []);
 
-  const fetchUrl = `https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet&maxResults=100&order=relevance&videoId=${videoId}&prettyPrint=true&key=${
-    import.meta.env.VITE_YOUTUBE_API_KEY
-  }`;
+  const {
+    isFetching: isFetchingComments,
+    data: comments,
+    refetch: fetchComments,
+  } = getComments(videoId);
 
-  const { isFetching, isError, data, error, refetch } =
-    useQuery<CommentThreads>({
-      queryKey: ["comments"],
-      queryFn: async () => {
-        const res = await fetch(fetchUrl);
-        if (!res.ok) throw new Error("Couldn't fetch the comments!");
-        return res.json();
-      },
-      refetchOnWindowFocus: false,
-      enabled: false,
-    });
+  const {
+    isFetching: isFetchingVibes,
+    data: vibeCheck,
+    refetch: fetchVibeCheck,
+  } = getVibeCheck(JSON.stringify(comments));
 
-  if (isError) {
+  useEffect(() => {
+    if (!!comments?.length) fetchVibeCheck();
+  }, [comments]);
+
+  if (!videoId.length) {
     return (
       <div>
-        <p>Error: {error.message}</p>
+        <p>Not a YouTube video.</p>
       </div>
     );
   }
 
-  if (isFetching) {
+  if (isFetchingComments || isFetchingVibes) {
     return (
       <div>
-        <p>Loading...</p>
+        <img src={reactLogo} className="logo react" alt="React logo" />
+        <p>
+          <em>Generating vibe check...</em>
+        </p>
       </div>
     );
   }
 
   return (
     <div>
-      {!!videoId.length ? (
-        !data ? (
-          <button type="button" onClick={() => refetch()}>
-            Generate the vibe check!
-          </button>
-        ) : (
-          <ul>
-            {data.items.map(
-              ({
-                snippet: {
-                  topLevelComment: { id, snippet },
-                },
-              }) => (
-                <li key={id}>{snippet.textOriginal}</li>
-              )
-            )}
-          </ul>
-        )
+      {!vibeCheck?.length ? (
+        <button type="button" onClick={() => fetchComments()}>
+          Generate the vibe check!
+        </button>
       ) : (
-        "Not a YouTube video."
+        <p>{vibeCheck}</p>
       )}
     </div>
   );
