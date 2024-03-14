@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "Vibe Check",
+  "description": "Use GPT to generate a vibe check for any YouTube video.",
+  "version": "1.0",
+  "action": {
+    "default_popup": "index.html"
+  },
+  "host_permissions": ["https://*.youtube.com/watch*"],
+  "permissions": ["activeTab"]
+}
