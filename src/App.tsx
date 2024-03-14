@@ -52,7 +52,7 @@ function App() {
     <div>
       {!vibeCheck?.length ? (
         <button type="button" onClick={() => fetchComments()}>
-          Generate the vibe check!
+          Generate a vibe check!
         </button>
       ) : (
         <p>{vibeCheck}</p>
