@@ -14,11 +14,9 @@ Built using `create-vite-app` (React, TypeScript, SWC)
 
 #### Resources
 
-[Google Gemini API Quickstart](https://ai.google.dev/tutorials/node_quickstart)
-
-[YouTube Data API `commentThreads: list` Docs](https://developers.google.com/youtube/v3/docs/commentThreads/list)
-
-[Google Manifest File Format](https://developer.chrome.com/docs/extensions/reference/manifest)
+- [Google Gemini API Quickstart](https://ai.google.dev/tutorials/node_quickstart)
+- [YouTube Data API `commentThreads: list` Docs](https://developers.google.com/youtube/v3/docs/commentThreads/list)
+- [Google Manifest File Format](https://developer.chrome.com/docs/extensions/reference/manifest)
 
 #### 🚨 NOT PRODUCTION READY CODE.
 
